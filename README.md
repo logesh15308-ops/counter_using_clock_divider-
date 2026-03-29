@@ -110,29 +110,21 @@ module top_counter(
     output [3:0] updown_out,
     output [3:0] mod10_out
 );
-
     wire slow_clk;
-
     clock_divider cd(clk, rst, slow_clk);
     up_down_counter ud(slow_clk, rst, mode, updown_out);
     mod10_counter m10(slow_clk, rst, mod10_out);
-
 endmodule
 ```
 # Testbench
-
 ```
 module tb_counter;
-
     reg clk, rst, mode;
     wire [3:0] updown_out;
     wire [3:0] mod10_out;
-
     top_counter uut(clk, rst, mode, updown_out, mod10_out);
-
     initial clk = 0;
     always #5 clk = ~clk;
-
     initial begin
         rst = 1;
         mode = 1;  // Up mode
@@ -142,7 +134,6 @@ module tb_counter;
 
         #300 $finish;
     end
-
 endmodule
 ```
 # Output Waveform:
